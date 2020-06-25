@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() => runApp(App());
 
@@ -22,7 +23,18 @@ class App extends StatelessWidget {
   }
 }
 
-class DicePage extends StatelessWidget {
+class DicePage extends StatefulWidget {
+  @override
+  _DicePageState createState() => _DicePageState();
+}
+
+class _DicePageState extends State<DicePage> {
+
+  final spacing = 20.0;
+
+  int leftDiceValue = 1;
+  int rightDiceValue = 3;
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -30,24 +42,34 @@ class DicePage extends StatelessWidget {
         children: <Widget>[
           Expanded(
             child: Container(
-              margin: EdgeInsets.only(left: 10),
+              margin: EdgeInsets.only(left: spacing),
               child: FlatButton(
                 padding: EdgeInsets.all(0),
-                child: Image.asset('images/dice1.png'),
-                onPressed: () => print('Left dice got clicked'),
+                child: Image.asset('images/dice$leftDiceValue.png'),
+                onPressed: () {
+                  print('Left dice got clicked');
+                  setState(() {
+                    leftDiceValue = Random().nextInt(6) + 1;
+                  });
+                },
               ),
             ),
           ),
           SizedBox(
-            width: 10,
+            width: spacing,
           ),
           Expanded(
             child: Container(
-              margin: EdgeInsets.only(right: 10),
+              margin: EdgeInsets.only(right: spacing),
               child: FlatButton(
                 padding: EdgeInsets.all(0),
-                child: Image.asset('images/dice1.png'),
-                onPressed: () => print('Right dice got clicked'),
+                child: Image.asset('images/dice$rightDiceValue.png'),
+                onPressed: () {
+                  print('Right dice got clicked');
+                  setState(() {
+                    rightDiceValue = Random().nextInt(6) + 1;
+                  });
+                },
               ),
             ),
           ),
