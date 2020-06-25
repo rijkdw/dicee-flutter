@@ -7,6 +7,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.red,
         appBar: AppBar(
@@ -29,8 +30,12 @@ class DicePage extends StatelessWidget {
         children: <Widget>[
           Expanded(
             child: Container(
-              padding: EdgeInsets.only(left: 10),
-              child: Image.asset('images/dice1.png'),
+              margin: EdgeInsets.only(left: 10),
+              child: FlatButton(
+                padding: EdgeInsets.all(0),
+                child: Image.asset('images/dice1.png'),
+                onPressed: () => print('Left dice got clicked'),
+              ),
             ),
           ),
           SizedBox(
@@ -38,8 +43,12 @@ class DicePage extends StatelessWidget {
           ),
           Expanded(
             child: Container(
-              padding: EdgeInsets.only(right: 10),
-              child: Image.asset('images/dice1.png'),
+              margin: EdgeInsets.only(right: 10),
+              child: FlatButton(
+                padding: EdgeInsets.all(0),
+                child: Image.asset('images/dice1.png'),
+                onPressed: () => print('Right dice got clicked'),
+              ),
             ),
           ),
         ],
