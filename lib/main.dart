@@ -40,7 +40,19 @@ class _DicePageState extends State<DicePage> {
   final spacing = 20.0;
 
   int leftDiceValue = 1;
-  int rightDiceValue = 3;
+  int rightDiceValue = 6;
+
+  void randomLeft() {
+    setState(() {
+      leftDiceValue = Random().nextInt(6)+1;
+    });
+  }
+
+  void randomRight() {
+    setState(() {
+      rightDiceValue = Random().nextInt(6)+1;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,9 +69,7 @@ class _DicePageState extends State<DicePage> {
                   child: Image.asset('images/dice$leftDiceValue.png'),
                   onPressed: () {
                     print('Left dice got clicked');
-                    setState(() {
-                      leftDiceValue = Random().nextInt(6) + 1;
-                    });
+                    randomLeft();
                   },
                 ),
               ),
@@ -75,9 +85,7 @@ class _DicePageState extends State<DicePage> {
                   child: Image.asset('images/dice$rightDiceValue.png'),
                   onPressed: () {
                     print('Right dice got clicked');
-                    setState(() {
-                      rightDiceValue = Random().nextInt(6) + 1;
-                    });
+                    randomRight();
                   },
                 ),
               ),
@@ -89,10 +97,8 @@ class _DicePageState extends State<DicePage> {
         ),
         InkWell(
           onTap: () {
-            setState(() {
-              leftDiceValue = Random().nextInt(6) + 1;
-              rightDiceValue = Random().nextInt(6) + 1;
-            });
+            randomRight();
+            randomLeft();
           },
           child: Container(
             padding: EdgeInsets.symmetric(
