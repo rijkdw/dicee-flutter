@@ -10,12 +10,20 @@ class App extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.black,
         appBar: AppBar(
-          title: Text('Dicee'),
           elevation: 0.0,
           centerTitle: true,
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.black,
+          title: Text(
+            'DICEE',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1,
+              fontSize: 24,
+            ),
+          ),
         ),
         body: DicePage(),
       ),
@@ -29,7 +37,6 @@ class DicePage extends StatefulWidget {
 }
 
 class _DicePageState extends State<DicePage> {
-
   final spacing = 20.0;
 
   int leftDiceValue = 1;
@@ -37,44 +44,80 @@ class _DicePageState extends State<DicePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: Container(
-              margin: EdgeInsets.only(left: spacing),
-              child: FlatButton(
-                padding: EdgeInsets.all(0),
-                child: Image.asset('images/dice$leftDiceValue.png'),
-                onPressed: () {
-                  print('Left dice got clicked');
-                  setState(() {
-                    leftDiceValue = Random().nextInt(6) + 1;
-                  });
-                },
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Row(
+          children: <Widget>[
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.only(left: spacing),
+                child: FlatButton(
+                  padding: EdgeInsets.all(0),
+                  child: Image.asset('images/dice$leftDiceValue.png'),
+                  onPressed: () {
+                    print('Left dice got clicked');
+                    setState(() {
+                      leftDiceValue = Random().nextInt(6) + 1;
+                    });
+                  },
+                ),
+              ),
+            ),
+            SizedBox(
+              width: spacing,
+            ),
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.only(right: spacing),
+                child: FlatButton(
+                  padding: EdgeInsets.all(0),
+                  child: Image.asset('images/dice$rightDiceValue.png'),
+                  onPressed: () {
+                    print('Right dice got clicked');
+                    setState(() {
+                      rightDiceValue = Random().nextInt(6) + 1;
+                    });
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 60,
+        ),
+        InkWell(
+          onTap: () {
+            setState(() {
+              leftDiceValue = Random().nextInt(6) + 1;
+              rightDiceValue = Random().nextInt(6) + 1;
+            });
+          },
+          child: Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: 30,
+              vertical: 10,
+            ),
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Colors.white,
+                width: 4,
+              ),
+              borderRadius: BorderRadius.circular(7),
+            ),
+            child: Text(
+              'ROLL',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 1,
+                fontSize: 24,
               ),
             ),
           ),
-          SizedBox(
-            width: spacing,
-          ),
-          Expanded(
-            child: Container(
-              margin: EdgeInsets.only(right: spacing),
-              child: FlatButton(
-                padding: EdgeInsets.all(0),
-                child: Image.asset('images/dice$rightDiceValue.png'),
-                onPressed: () {
-                  print('Right dice got clicked');
-                  setState(() {
-                    rightDiceValue = Random().nextInt(6) + 1;
-                  });
-                },
-              ),
-            ),
-          ),
-        ],
-      ),
+        )
+      ],
     );
   }
 }
