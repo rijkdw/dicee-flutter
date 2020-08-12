@@ -1,6 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:vibration/vibration.dart';
+
+Future vibrate() async {
+  if (await Vibration.hasVibrator()) {
+    Vibration.vibrate(duration: 75);
+  }
+}
 
 void main() => runApp(App());
 
@@ -8,7 +15,6 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(
@@ -21,7 +27,7 @@ class App extends StatelessWidget {
               color: Colors.white,
               fontWeight: FontWeight.bold,
               letterSpacing: 1,
-              fontSize: 24,
+//              fontSize: 32,
             ),
           ),
         ),
@@ -43,12 +49,14 @@ class _DicePageState extends State<DicePage> {
   int rightDiceValue = 6;
 
   void randomLeft() {
+    vibrate();
     setState(() {
       leftDiceValue = Random().nextInt(6)+1;
     });
   }
 
   void randomRight() {
+    vibrate();
     setState(() {
       rightDiceValue = Random().nextInt(6)+1;
     });
@@ -118,7 +126,7 @@ class _DicePageState extends State<DicePage> {
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
                 letterSpacing: 1,
-                fontSize: 24,
+                fontSize: 20,
               ),
             ),
           ),
